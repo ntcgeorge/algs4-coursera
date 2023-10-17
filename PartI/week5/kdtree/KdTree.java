@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KdTree {
-    int n = 0;
+    private int n = 0;
 
     private class Node {
         Node left;
@@ -21,7 +21,7 @@ public class KdTree {
         }
     }
 
-    Node root;
+    private Node root;
 
     public KdTree() {
         root = null;
@@ -32,8 +32,7 @@ public class KdTree {
     }
 
     public int size() {
-        if (root == null) return 0;
-        else return n;
+        return n;
     }
 
     public void insert(Point2D p) {
@@ -51,8 +50,8 @@ public class KdTree {
             ymin = rect.ymin();
             ymax = rect.ymax();
             if (p.x() <= node.point.x()) { // go left
-                xmin = node.point.x();
-                xmax = rect.xmin();
+                xmin = rect.xmin();
+                xmax = node.point.x();
                 node.left = insert(node.left, p, new RectHV(xmin, ymin, xmax, ymax), false);
             } else { // go right
                 xmin = node.point.x();
@@ -67,18 +66,19 @@ public class KdTree {
             if (p.y() <= node.point.y()) { // go down
                 ymin = rect.ymin();
                 ymax = node.point.y();
-                node.right = insert(node.right, p, new RectHV(xmin, ymin, xmax, ymax), true);
+                node.left = insert(node.left, p, new RectHV(xmin, ymin, xmax, ymax), true);
 
             } else { // go up
                 ymin = node.point.x();
                 ymax = rect.ymax();
-                node.left = insert(node.left, p, new RectHV(xmin, ymin, xmax, ymax), true);
+                node.right = insert(node.right, p, new RectHV(xmin, ymin, xmax, ymax), true);
             }
         }
         return node;
     }
 
     public boolean contains(Point2D p) {
+        if (p == null) throw new IllegalArgumentException("the argument is null to method contains()");
         if (root == null) return false;
         return contains(root, p);
     }
