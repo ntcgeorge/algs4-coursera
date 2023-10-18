@@ -50,6 +50,7 @@ public class PointSET {
     }
 
     public Point2D nearest(Point2D p) {
+        if (p == null) throw new IllegalArgumentException("point is null to the nearest()");
         double dis = Double.MAX_VALUE;
         Point2D champ = null;
         for (Point2D that : bst) {
