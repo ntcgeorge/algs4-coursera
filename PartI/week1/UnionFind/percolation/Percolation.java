@@ -32,7 +32,7 @@ public class Percolation {
 
     }
 
-    // open the site(row, col) if it is not open already
+    // open the site(row, col) if it is not open yet
     public void open(int row, int col) {
         if (isOpen(row, col)) return;
         validate(row, col);

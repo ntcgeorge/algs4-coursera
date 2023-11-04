@@ -169,7 +169,7 @@ public class Board {
     }
 
     public static void main(String[] args) {
-        In in = new In("puzzle11.txt");
+        In in = new In("input.txt");
         int[][] tiles = new int[3][3];
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++)
